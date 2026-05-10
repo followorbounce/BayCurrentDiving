@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found — Bay Current Diving</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0D1117; --fog: #F2F1EE; --steel: #8A9099;
+      --current: #2F6B8A; --signal: #E8A020;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--ink); color: var(--fog);
+      font-family: 'DM Mono', monospace;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      min-height: 100vh; padding: 24px; text-align: center;
+    }
+    .code {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(80px, 15vw, 160px);
+      font-weight: 800; line-height: 1;
+      color: rgba(242,241,238,0.06);
+      letter-spacing: -0.04em;
+    }
+    .title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(24px, 4vw, 40px);
+      font-weight: 800; color: var(--fog);
+      letter-spacing: -0.02em; margin-bottom: 16px;
+    }
+    .sub {
+      font-size: 12px; letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--steel); margin-bottom: 40px;
+      line-height: 1.6;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--signal); color: var(--ink);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none; padding: 14px 28px;
+    }
+  </style>
+</head>
+<body>
+  <p class="code">404</p>
+  <h1 class="title">Page Not Found.</h1>
+  <p class="sub">Looks like you dove too deep.<br>This page doesn't exist.</p>
+  <a href="/" class="btn">← Back to Surface</a>
+</body>
+</html>
