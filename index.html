@@ -2,70 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
-  <!--
-    viewport-fit=cover — exposes CSS env(safe-area-inset-*) variables.
-    Without it, content hides behind the iPhone notch / Dynamic Island
-    and the home indicator bar at the bottom.
-  -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
   <title>Bay Current Diving — Underwater Hull Service, San Francisco Bay</title>
   <meta name="description" content="Professional underwater hull cleaning, barnacle removal, prop inspection and zinc replacement. Serving commercial fishing boats and private vessels at Fisherman's Wharf, San Francisco Bay.">
-  <meta name="keywords" content="hull cleaning San Francisco, barnacle removal Bay Area, underwater diving service, Fisherman's Wharf, commercial fishing boat maintenance, prop inspection SF">
-
-  <!--
-    CONTENT SECURITY POLICY
-    ─────────────────────────────────────────────────────────────────────
-    Why the original code triggered a CSP eval error:
-      GitHub Pages in development mode (jekyll serve) injects a LiveReload
-      snippet that uses eval(). This disappears in production. Additionally,
-      some browser extensions (LastPass, Grammarly, uBlock) inject eval into
-      pages. Neither is caused by this codebase.
-
-    This CSP covers everything this page actually uses:
-      script-src  'self'  — only js/main.js, loaded from same origin
-      style-src   'self' + Google Fonts CDN
-      font-src    Google Fonts CDN
-      img-src     'self' + data: (for the SVG grain texture in CSS)
-      connect-src 'none' — page makes no API calls
-
-    NO unsafe-eval. NO unsafe-inline for scripts.
-    Inline styles in HTML are gone — moved to css/styles.css.
-    Inline scripts are gone — moved to js/main.js loaded with defer.
-    ─────────────────────────────────────────────────────────────────────
-  -->
-  <meta http-equiv="Content-Security-Policy"
-    content="
-      default-src 'none';
-      script-src  'self';
-      style-src   'self' https://fonts.googleapis.com;
-      font-src    https://fonts.gstatic.com;
-      img-src     'self' data:;
-      connect-src 'none';
-    ">
-
-  <!--
-    Font loading: display=swap prevents invisible text while fonts load (FOIT).
-    Both preconnect links need crossorigin because fonts are fetched from a
-    different origin (fonts.gstatic.com), making them CORS requests.
-  -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap">
-
-  <!-- All styles in one external file — no inline styles anywhere -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════
-     NAVIGATION
-═══════════════════════════════════════════ -->
-<nav>
+<nav id="site-nav">
   <div class="container">
     <div class="nav-inner">
-
       <a href="#hero" class="logo">
         <div class="logo-mark">
           <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -80,40 +29,27 @@
           <span class="logo-secondary">Diving · SF Bay</span>
         </div>
       </a>
-
       <ul class="nav-links">
         <li><a href="#services">Services</a></li>
         <li><a href="#about">About Tony</a></li>
         <li><a href="#process">How It Works</a></li>
         <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
       </ul>
-
       <a href="tel:+12095526958" class="mobile-cta">Call Tony</a>
-
     </div>
   </div>
 </nav>
 
-
-<!-- ═══════════════════════════════════════════
-     HERO
-═══════════════════════════════════════════ -->
 <section id="hero">
   <div class="hero-bg" aria-hidden="true"></div>
-
   <div class="hero-content container">
     <p class="hero-label">Fisherman's Wharf · San Francisco Bay</p>
-
     <h1 class="hero-headline">
       Clean Hull.<br>
       <em>Clear Water.</em><br>
       Back to Work.
     </h1>
-
-    <p class="hero-sub">
-      Professional underwater hull service for commercial fishing boats and private vessels. One diver. No middlemen. Done right.
-    </p>
-
+    <p class="hero-sub">Professional underwater hull service for commercial fishing boats and private vessels. One diver. No middlemen. Done right.</p>
     <div class="hero-actions">
       <a href="#contact" class="btn-primary">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
@@ -124,7 +60,6 @@
       <a href="#services" class="btn-secondary">View Services →</a>
     </div>
   </div>
-
   <div class="hero-bar">
     <div class="container">
       <div class="hero-bar-inner">
@@ -152,83 +87,50 @@
   </div>
 </section>
 
-
-<!-- ═══════════════════════════════════════════
-     SERVICES
-═══════════════════════════════════════════ -->
 <section id="services">
   <div class="container">
     <div class="section-header reveal">
       <p class="label">What We Do</p>
       <h2 class="section-title">Underwater Work.<br>Professionally Done.</h2>
     </div>
-
     <div class="services-grid reveal">
-
       <div class="service-card">
         <p class="service-num">01</p>
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <ellipse cx="12" cy="18" rx="10" ry="4"/>
-          <path d="M2 18v-4a10 10 0 0020 0v4"/>
-          <path d="M7 10c0-2.8 2.2-5 5-5s5 2.2 5 5"/>
-        </svg>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><ellipse cx="12" cy="18" rx="10" ry="4"/><path d="M2 18v-4a10 10 0 0020 0v4"/><path d="M7 10c0-2.8 2.2-5 5-5s5 2.2 5 5"/></svg>
         <p class="service-name">Hull Cleaning</p>
         <p class="service-desc">Full underwater hull scrubbing. Removes bio-fouling, slime, and growth that slows your boat and wastes fuel.</p>
       </div>
-
       <div class="service-card">
         <p class="service-num">02</p>
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M8 12h8M12 8v8"/>
-          <circle cx="12" cy="12" r="3"/>
-        </svg>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/><circle cx="12" cy="12" r="3"/></svg>
         <p class="service-name">Barnacle Removal</p>
         <p class="service-desc">Manual and tool-assisted barnacle removal. No shortcuts. We get the hard spots other services skip.</p>
       </div>
-
       <div class="service-card">
         <p class="service-num">03</p>
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-        </svg>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
         <p class="service-name">Prop Inspection</p>
         <p class="service-desc">Full propeller and shaft inspection. We check for damage, entangled line, and wear — and report what we find.</p>
       </div>
-
       <div class="service-card">
         <p class="service-num">04</p>
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <rect x="3" y="11" width="18" height="10" rx="1"/>
-          <path d="M7 11V7a5 5 0 0110 0v4"/>
-          <circle cx="12" cy="16" r="1"/>
-        </svg>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="1"/><path d="M7 11V7a5 5 0 0110 0v4"/><circle cx="12" cy="16" r="1"/></svg>
         <p class="service-name">Zinc Replacement</p>
         <p class="service-desc">Sacrificial anode inspection and replacement underwater. Protect your drive gear and hull from galvanic corrosion.</p>
       </div>
-
       <div class="service-card">
         <p class="service-num">05</p>
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-        </svg>
-        <p class="service-name">Wharf &amp; Commercial Service</p>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <p class="service-name">Wharf &amp; Commercial</p>
         <p class="service-desc">Ongoing maintenance contracts for commercial fishing operations. Regular dives keep your fleet in the water and earning.</p>
       </div>
-
     </div>
   </div>
 </section>
 
-
-<!-- ═══════════════════════════════════════════
-     ABOUT TONY
-═══════════════════════════════════════════ -->
 <section id="about">
   <div class="container">
     <div class="about-grid">
-
       <div class="about-image-placeholder reveal">
         <div class="about-image-inner">
           <svg class="diver-silhouette" width="120" height="180" viewBox="0 0 120 180" fill="none" aria-hidden="true">
@@ -243,7 +145,6 @@
           <p class="about-image-caption">Tony — SF Bay Commercial Diver</p>
         </div>
       </div>
-
       <div class="about-content reveal">
         <p class="label">The Operator</p>
         <h2 class="about-name">Tony.</h2>
@@ -256,75 +157,42 @@
           <br>
           <p><strong>Fisherman's Wharf is home.</strong> The Bay is the job. This is what I do.</p>
         </div>
-
         <div class="about-details">
-          <div class="about-detail">
-            <span class="about-detail-key">Base</span>
-            <span class="about-detail-val">Fisherman's Wharf, SF</span>
-          </div>
-          <div class="about-detail">
-            <span class="about-detail-key">Certified</span>
-            <span class="about-detail-val">Commercial Diver, OSHA</span>
-          </div>
-          <div class="about-detail">
-            <span class="about-detail-key">Experience</span>
-            <span class="about-detail-val">15+ Years in SF Bay</span>
-          </div>
-          <div class="about-detail">
-            <span class="about-detail-key">Coverage</span>
-            <span class="about-detail-val">SF Bay, Marin, Oakland, Alameda</span>
-          </div>
-          <div class="about-detail">
-            <span class="about-detail-key">Specialty</span>
-            <span class="about-detail-val">Commercial Fishing Fleet</span>
-          </div>
+          <div class="about-detail"><span class="about-detail-key">Base</span><span class="about-detail-val">Fisherman's Wharf, SF</span></div>
+          <div class="about-detail"><span class="about-detail-key">Certified</span><span class="about-detail-val">Commercial Diver, OSHA</span></div>
+          <div class="about-detail"><span class="about-detail-key">Experience</span><span class="about-detail-val">15+ Years in SF Bay</span></div>
+          <div class="about-detail"><span class="about-detail-key">Coverage</span><span class="about-detail-val">SF Bay, Marin, Oakland, Alameda</span></div>
+          <div class="about-detail"><span class="about-detail-key">Specialty</span><span class="about-detail-val">Commercial Fishing Fleet</span></div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-
-<!-- ═══════════════════════════════════════════
-     PROCESS
-═══════════════════════════════════════════ -->
 <section id="process">
   <div class="container">
     <div class="section-header reveal">
-      <p class="label process-label">How It Works</p>
+      <p class="label label--light">How It Works</p>
       <h2 class="process-title">Simple as It Gets.</h2>
     </div>
-
     <div class="process-steps">
       <div class="process-step">
-        <div class="step-num-wrap">
-          <div class="step-num">01</div>
-        </div>
+        <div class="step-num-wrap"><div class="step-num">01</div></div>
         <h3 class="step-title">Contact</h3>
         <p class="step-desc">Call, text, or email. Tell me your vessel, location, and what you need. I'll give you a straight answer and a fair price.</p>
       </div>
-
       <div class="process-step">
-        <div class="step-num-wrap">
-          <div class="step-num">02</div>
-        </div>
+        <div class="step-num-wrap"><div class="step-num">02</div></div>
         <h3 class="step-title">Schedule</h3>
         <p class="step-desc">We pick a time that works for the tides and your operation. I'll show up when I say I will.</p>
       </div>
-
       <div class="process-step">
-        <div class="step-num-wrap">
-          <div class="step-num">03</div>
-        </div>
+        <div class="step-num-wrap"><div class="step-num">03</div></div>
         <h3 class="step-title">Dive Service</h3>
         <p class="step-desc">I go under and do the work. Hull scrubbed, zincs checked, props inspected. Professional gear, professional results.</p>
       </div>
-
       <div class="process-step">
-        <div class="step-num-wrap">
-          <div class="step-num">04</div>
-        </div>
+        <div class="step-num-wrap"><div class="step-num">04</div></div>
         <h3 class="step-title">Clean Report</h3>
         <p class="step-desc">You get a quick rundown on what I found and what I did. No upsell. If something needs attention, I'll tell you straight.</p>
       </div>
@@ -332,19 +200,13 @@
   </div>
 </section>
 
-
-<!-- ═══════════════════════════════════════════
-     COVERAGE
-═══════════════════════════════════════════ -->
 <section id="coverage">
   <div class="container">
     <div class="coverage-inner">
       <div class="coverage-text reveal">
         <p class="label">Service Area</p>
         <h2 class="coverage-title">San Francisco Bay &amp; Surrounding Docks.</h2>
-        <p class="coverage-desc">
-          Based at Fisherman's Wharf. Serving commercial and private vessels throughout the Bay — from the Ferry Building to Sausalito, Oakland to Alameda.
-        </p>
+        <p class="coverage-desc">Based at Fisherman's Wharf. Serving commercial and private vessels throughout the Bay — from the Ferry Building to Sausalito, Oakland to Alameda.</p>
         <div class="coverage-tags">
           <span class="tag">Fisherman's Wharf</span>
           <span class="tag">Pier 39 Area</span>
@@ -355,7 +217,6 @@
           <span class="tag">South Beach Harbor</span>
         </div>
       </div>
-
       <div class="coverage-visual reveal">
         <div class="bay-map">
           <svg width="100%" height="100%" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map of San Francisco Bay service area">
@@ -363,7 +224,6 @@
             <path d="M0 340 L0 80 L40 60 L60 40 L80 20 L100 10 L120 5 L130 20 L140 50 L130 100 L110 150 L90 200 L70 280 L50 340Z" fill="#E8E5DF"/>
             <path d="M0 80 L0 0 L80 0 L100 10 L80 20 L60 40 L40 60Z" fill="#E8E5DF"/>
             <path d="M340 340 L340 0 L260 0 L220 20 L200 60 L210 120 L220 180 L230 240 L250 340Z" fill="#E8E5DF"/>
-            <path d="M50 50 L80 30 L100 10 L90 30 L70 50Z" fill="#DDD8D0"/>
             <text x="160" y="180" text-anchor="middle" font-family="monospace" font-size="9" fill="#2F6B8A" opacity="0.7" letter-spacing="3">SF BAY</text>
             <circle cx="112" cy="85" r="6" fill="#E8A020"/>
             <text x="120" y="75" font-family="monospace" font-size="7" fill="#0D1117">FISH. WHARF</text>
@@ -375,11 +235,6 @@
             <text x="183" y="182" font-family="monospace" font-size="7" fill="#0D1117">ALAMEDA</text>
             <line x1="70" y1="55" x2="50" y2="55" stroke="#B85C38" stroke-width="2" stroke-dasharray="3,2"/>
             <text x="20" y="50" font-family="monospace" font-size="6" fill="#B85C38">GG BRIDGE</text>
-            <line x1="145" y1="115" x2="215" y2="135" stroke="#8A9099" stroke-width="1.5" stroke-dasharray="3,2"/>
-            <line x1="20" y1="320" x2="70" y2="320" stroke="#8A9099" stroke-width="1"/>
-            <line x1="20" y1="316" x2="20" y2="324" stroke="#8A9099" stroke-width="1"/>
-            <line x1="70" y1="316" x2="70" y2="324" stroke="#8A9099" stroke-width="1"/>
-            <text x="30" y="315" font-family="monospace" font-size="6" fill="#8A9099">~5mi</text>
           </svg>
         </div>
       </div>
@@ -387,84 +242,42 @@
   </div>
 </section>
 
-
-<!-- ═══════════════════════════════════════════
-     CONTACT
-═══════════════════════════════════════════ -->
 <section id="contact">
   <div class="container">
     <div class="contact-grid">
-
       <div class="reveal">
-        <p class="label contact-label">Get in Touch</p>
+        <p class="label label--dim">Get in Touch</p>
         <h2 class="contact-headline">Ready<br>When<br>You Are.</h2>
-        <p class="contact-note">
-          Best way to reach me is by phone or text. I'm usually on the water early, so a morning call gets a same-day response.
-        </p>
+        <p class="contact-note">Best way to reach me is by phone or text. I'm usually on the water early, so a morning call gets a same-day response.</p>
         <div class="contact-response">
           <div class="response-dot" aria-hidden="true"></div>
-          <p class="response-text">
-            Typical response time: same day. For urgent commercial fleet needs, call direct — I pick up.
-          </p>
+          <p class="response-text">Typical response time: same day. For urgent commercial fleet needs, call direct — I pick up.</p>
         </div>
       </div>
-
       <div class="reveal">
         <div class="contact-methods">
-
           <a href="tel:+12095526958" class="contact-method">
-            <svg class="contact-method-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
-            </svg>
-            <div class="contact-method-content">
-              <span class="contact-method-label">Call</span>
-              <span class="contact-method-value">(209) 552-6958</span>
-            </div>
+            <svg class="contact-method-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            <div class="contact-method-content"><span class="contact-method-label">Call</span><span class="contact-method-value">(209) 552-6958</span></div>
           </a>
-
           <a href="sms:+12095526958" class="contact-method">
-            <svg class="contact-method-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-            </svg>
-            <div class="contact-method-content">
-              <span class="contact-method-label">Text / SMS</span>
-              <span class="contact-method-value">(209) 552-6958</span>
-            </div>
+            <svg class="contact-method-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            <div class="contact-method-content"><span class="contact-method-label">Text / SMS</span><span class="contact-method-value">(209) 552-6958</span></div>
           </a>
-
           <a href="mailto:rocketnovember1975@gmail.com" class="contact-method">
-            <svg class="contact-method-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
-            </svg>
-            <div class="contact-method-content">
-              <span class="contact-method-label">Email</span>
-              <span class="contact-method-value">rocketnovember1975@gmail.com</span>
-            </div>
+            <svg class="contact-method-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <div class="contact-method-content"><span class="contact-method-label">Email</span><span class="contact-method-value">rocketnovember1975@gmail.com</span></div>
           </a>
-
           <div class="contact-method">
-            <svg class="contact-method-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
-              <circle cx="12" cy="10" r="3"/>
-            </svg>
-            <div class="contact-method-content">
-              <span class="contact-method-label">Location</span>
-              <span class="contact-method-value">Fisherman's Wharf, San Francisco, CA</span>
-            </div>
+            <svg class="contact-method-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div class="contact-method-content"><span class="contact-method-label">Location</span><span class="contact-method-value">Fisherman's Wharf, San Francisco, CA</span></div>
           </div>
-
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-
-<!-- ═══════════════════════════════════════════
-     FOOTER
-═══════════════════════════════════════════ -->
 <footer>
   <div class="container">
     <div class="footer-inner">
@@ -487,12 +300,6 @@
   </div>
 </footer>
 
-<!--
-  Script is loaded with defer — executes after HTML is parsed, before DOMContentLoaded.
-  This is equivalent to placing it at end of body, but cleaner.
-  No inline scripts → script-src 'self' works without 'unsafe-inline'.
--->
 <script src="js/main.js" defer></script>
-
 </body>
 </html>
