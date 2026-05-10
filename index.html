@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bay Current Diving — Underwater Hull Service, San Francisco Bay</title>
+<meta name="description" content="Professional underwater hull cleaning, barnacle removal, prop inspection and zinc replacement. Serving commercial fishing boats and private vessels at Fisherman's Wharf, San Francisco Bay.">
+<meta name="keywords" content="hull cleaning San Francisco, barnacle removal Bay Area, underwater diving service, Fisherman's Wharf, commercial fishing boat maintenance, prop inspection SF">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================
+   DESIGN SYSTEM — BAY CURRENT DIVING
+   ============================================
+   Typography:
+     Display: Syne 700/800 — industrial authority
+     Body: DM Sans 300/400 — clear and readable
+     Mono: DM Mono — data, labels, process steps
+
+   Color Palette:
+     --fog:      #F2F1EE  (SF fog, warm white)
+     --salt:     #E8E5DF  (salt-bleached timber)
+     --steel:    #8A9099  (bay water, galvanized steel)
+     --deep:     #1C2127  (deep water, wet hull)
+     --ink:      #0D1117  (true dark, engine paint)
+     --current:  #2F6B8A  (Pacific current blue)
+     --kelp:     #3D5C4A  (dark kelp, muted accent)
+     --rust:     #B85C38  (dock rust, mooring rings)
+     --signal:   #E8A020  (marine signal orange — CTA)
+
+   Spacing: 8px base unit
+   Borders: 1px solid rgba — minimal, structural
+   Radius: 0px (hull-flat) or 2px (micro-radius)
+   ============================================ */
+
+:root {
+  --fog: #F2F1EE;
+  --salt: #E8E5DF;
+  --steel: #8A9099;
+  --deep: #1C2127;
+  --ink: #0D1117;
+  --current: #2F6B8A;
+  --kelp: #3D5C4A;
+  --rust: #B85C38;
+  --signal: #E8A020;
+
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 48px;
+  --space-xl: 80px;
+  --space-2xl: 120px;
+
+  --max-width: 1100px;
+  --transition: 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--fog);
+  color: var(--deep);
+  line-height: 1.65;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   NOISE TEXTURE OVERLAY (subtle grain)
+   ============================================ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 var(--space-sm); }
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--steel);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.label::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--steel);
+}
+
+hr.rule {
+  border: none;
+  border-top: 1px solid rgba(28,33,39,0.1);
+  margin: var(--space-lg) 0;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: var(--space-sm) 0;
+  background: rgba(242, 241, 238, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(28,33,39,0.08);
+  transition: var(--transition);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* LOGO MARK — text-based, embroidery-friendly */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.logo-mark {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.logo-mark svg {
+  width: 100%;
+  height: 100%;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.logo-primary {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.logo-secondary {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--steel);
+  margin-top: 2px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--deep);
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity var(--transition);
+}
+
+.nav-links a:hover { opacity: 1; }
+
+.nav-cta {
+  background: var(--ink) !important;
+  color: var(--fog) !important;
+  padding: 8px 16px !important;
+  opacity: 1 !important;
+  font-size: 10px !important;
+  letter-spacing: 0.16em;
+  transition: background var(--transition) !important;
+}
+
+.nav-cta:hover { background: var(--current) !important; }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+#hero {
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  padding-top: 64px;
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+/* Fog/water atmosphere */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 120% 60% at 60% 80%, rgba(47,107,138,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 50% at 20% 30%, rgba(47,107,138,0.12) 0%, transparent 55%),
+    linear-gradient(175deg, #0D1117 0%, #141A22 40%, #1C2530 100%);
+}
+
+/* Horizontal water lines */
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 28px,
+    rgba(47,107,138,0.06) 28px,
+    rgba(47,107,138,0.06) 29px
+  );
+  mask-image: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-2xl) 0 var(--space-xl);
+}
+
+.hero-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin-bottom: var(--space-md);
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 8vw, 110px);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--fog);
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  animation: fadeUp 0.8s 0.35s forwards;
+}
+
+.hero-headline em {
+  font-style: normal;
+  color: var(--current);
+}
+
+.hero-sub {
+  font-family: var(--font-body);
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 300;
+  color: rgba(242,241,238,0.55);
+  max-width: 480px;
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  animation: fadeUp 0.8s 0.5s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.65s forwards;
+}
+
+/* CTA BUTTON — signal orange, marine authority */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--signal);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 28px;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.12);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.btn-primary:hover::after { opacity: 1; }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 32px rgba(232,160,32,0.3); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: rgba(242,241,238,0.55);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 28px;
+  border: 1px solid rgba(242,241,238,0.15);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.btn-secondary:hover {
+  color: var(--fog);
+  border-color: rgba(242,241,238,0.4);
+}
+
+/* Hero bottom bar */
+.hero-bar {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid rgba(242,241,238,0.08);
+  padding: var(--space-sm) 0;
+}
+
+.hero-bar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  opacity: 0;
+  animation: fadeUp 0.6s 0.9s forwards;
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--fog);
+  line-height: 1;
+}
+
+.hero-stat-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(242,241,238,0.35);
+}
+
+.hero-divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(242,241,238,0.1);
+}
+
+@media (max-width: 480px) {
+  .hero-divider { display: none; }
+  .hero-bar-inner { gap: var(--space-md); }
+}
+
+/* ============================================
+   SERVICES SECTION
+   ============================================ */
+#services {
+  background: var(--fog);
+  padding: var(--space-2xl) 0;
+}
+
+.section-header {
+  margin-bottom: var(--space-xl);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--ink);
+  margin-top: var(--space-sm);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px;
+  background: rgba(28,33,39,0.1);
+  border: 1px solid rgba(28,33,39,0.1);
+}
+
+.service-card {
+  background: var(--fog);
+  padding: var(--space-lg) var(--space-md);
+  transition: background var(--transition);
+  position: relative;
+}
+
+.service-card:hover {
+  background: var(--ink);
+}
+
+.service-card:hover .service-name,
+.service-card:hover .service-desc {
+  color: var(--fog);
+}
+
+.service-card:hover .service-icon {
+  color: var(--signal);
+}
+
+.service-card:hover .service-num {
+  color: rgba(242,241,238,0.15);
+}
+
+.service-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(28,33,39,0.2);
+  margin-bottom: var(--space-lg);
+  transition: color var(--transition);
+}
+
+.service-icon {
+  width: 40px;
+  height: 40px;
+  color: var(--current);
+  margin-bottom: var(--space-md);
+  transition: color var(--transition);
+}
+
+.service-name {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-xs);
+  transition: color var(--transition);
+}
+
+.service-desc {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--steel);
+  line-height: 1.6;
+  transition: color var(--transition);
+}
+
+/* ============================================
+   ABOUT SECTION
+   ============================================ */
+#about {
+  background: var(--salt);
+  padding: var(--space-2xl) 0;
+  border-top: 1px solid rgba(28,33,39,0.08);
+  border-bottom: 1px solid rgba(28,33,39,0.08);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .about-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+}
+
+.about-image-placeholder {
+  aspect-ratio: 4/5;
+  background: var(--deep);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-image-inner {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 40% 70%, rgba(47,107,138,0.3) 0%, transparent 60%),
+    linear-gradient(160deg, #1C2127 0%, #0D1117 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-md);
+}
+
+.about-image-caption {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(242,241,238,0.3);
+}
+
+/* Silhouette diver illustration */
+.diver-silhouette {
+  position: absolute;
+  bottom: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.15;
+}
+
+.about-content {
+  padding-top: var(--space-sm);
+}
+
+.about-name {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--ink);
+  margin: var(--space-sm) 0 var(--space-md);
+}
+
+.about-bio {
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--deep);
+  line-height: 1.75;
+  margin-bottom: var(--space-lg);
+}
+
+.about-bio strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.about-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  border-top: 1px solid rgba(28,33,39,0.1);
+  padding-top: var(--space-lg);
+}
+
+.about-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid rgba(28,33,39,0.06);
+}
+
+.about-detail-key {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+.about-detail-val {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+/* ============================================
+   PROCESS SECTION
+   ============================================ */
+#process {
+  background: var(--ink);
+  padding: var(--space-2xl) 0;
+}
+
+.process-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--fog);
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+}
+
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: calc(12.5% + 20px);
+  right: calc(12.5% + 20px);
+  height: 1px;
+  background: rgba(242,241,238,0.12);
+}
+
+@media (max-width: 768px) {
+  .process-steps {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  .process-steps::before { display: none; }
+}
+
+.process-step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding-right: var(--space-md);
+  opacity: 0;
+  animation: fadeUp 0.7s forwards;
+}
+
+.process-step:nth-child(1) { animation-delay: 0.1s; }
+.process-step:nth-child(2) { animation-delay: 0.25s; }
+.process-step:nth-child(3) { animation-delay: 0.4s; }
+.process-step:nth-child(4) { animation-delay: 0.55s; }
+
+.step-num-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.step-num {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(242,241,238,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--signal);
+  flex-shrink: 0;
+  background: rgba(232,160,32,0.06);
+}
+
+.step-connector {
+  height: 1px;
+  flex: 1;
+  background: rgba(242,241,238,0.08);
+}
+
+.step-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--fog);
+  letter-spacing: -0.01em;
+}
+
+.step-desc {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(242,241,238,0.45);
+  line-height: 1.65;
+}
+
+/* ============================================
+   COVERAGE / MAP SECTION
+   ============================================ */
+#coverage {
+  background: var(--fog);
+  padding: var(--space-xl) 0;
+  border-top: 1px solid rgba(28,33,39,0.08);
+}
+
+.coverage-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.coverage-text {
+  flex: 1;
+  min-width: 280px;
+}
+
+.coverage-title {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin: var(--space-xs) 0 var(--space-sm);
+}
+
+.coverage-desc {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--steel);
+  line-height: 1.65;
+}
+
+.coverage-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--current);
+  border: 1px solid rgba(47,107,138,0.3);
+  padding: 5px 10px;
+  background: rgba(47,107,138,0.05);
+}
+
+.coverage-visual {
+  flex: 0 0 340px;
+  max-width: 340px;
+}
+
+/* Simplified Bay Area map */
+.bay-map {
+  width: 100%;
+  aspect-ratio: 1;
+  position: relative;
+  border: 1px solid rgba(28,33,39,0.1);
+  background: #EBF2F5;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .coverage-visual { flex: 0 0 100%; max-width: 100%; }
+}
+
+/* ============================================
+   CONTACT SECTION
+   ============================================ */
+#contact {
+  background: var(--deep);
+  padding: var(--space-2xl) 0;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+}
+
+.contact-headline {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--fog);
+  margin: var(--space-sm) 0 var(--space-md);
+}
+
+.contact-note {
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(242,241,238,0.45);
+  line-height: 1.65;
+}
+
+.contact-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: rgba(242,241,238,0.06);
+}
+
+.contact-method {
+  background: var(--deep);
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  text-decoration: none;
+  transition: background var(--transition);
+  border-left: 2px solid transparent;
+}
+
+.contact-method:hover {
+  background: rgba(47,107,138,0.15);
+  border-left-color: var(--current);
+}
+
+.contact-method-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--current);
+  flex-shrink: 0;
+}
+
+.contact-method-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.contact-method-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(242,241,238,0.3);
+}
+
+.contact-method-value {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--fog);
+}
+
+.contact-response {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  border: 1px solid rgba(242,241,238,0.08);
+  display: flex;
+  gap: var(--space-sm);
+  align-items: flex-start;
+}
+
+.response-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--signal);
+  margin-top: 6px;
+  flex-shrink: 0;
+  animation: pulse 2s infinite;
+}
+
+.response-text {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(242,241,238,0.4);
+  line-height: 1.6;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer {
+  background: var(--ink);
+  padding: var(--space-lg) 0;
+  border-top: 1px solid rgba(242,241,238,0.05);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.footer-logo .logo-primary { font-size: 13px; color: rgba(242,241,238,0.7); }
+.footer-logo .logo-secondary { color: rgba(242,241,238,0.25); }
+
+.footer-copy {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: rgba(242,241,238,0.2);
+}
+
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     NAVIGATION
+     ============================================ -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+
+      <a href="#hero" class="logo">
+        <!-- LOGO MARK: simplified hull-cross with current wave -->
+        <div class="logo-mark">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Hull arc -->
+            <path d="M4 20 Q16 28 28 20" stroke="#0D1117" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <!-- Waterline -->
+            <line x1="2" y1="20" x2="30" y2="20" stroke="#2F6B8A" stroke-width="1.5"/>
+            <!-- Vertical diver line -->
+            <line x1="16" y1="6" x2="16" y2="20" stroke="#0D1117" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Small cross / compass mark at top -->
+            <circle cx="16" cy="6" r="2" fill="#E8A020"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-primary">Bay Current</span>
+          <span class="logo-secondary">Diving · SF Bay</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About Tony</a></li>
+        <li><a href="#process">How It Works</a></li>
+        <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+      </ul>
+
+      <a href="tel:+12095526958" class="mobile-cta">Call Tony</a>
+
+    </div>
+  </div>
+</nav>
+
+
+<!-- ============================================
+     HERO
+     ============================================ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+
+  <div class="hero-content container">
+    <p class="hero-label">Fisherman's Wharf · San Francisco Bay</p>
+
+    <h1 class="hero-headline">
+      Clean Hull.<br>
+      <em>Clear Water.</em><br>
+      Back to Work.
+    </h1>
+
+    <p class="hero-sub">
+      Professional underwater hull service for commercial fishing boats and private vessels. One diver. No middlemen. Done right.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        Get a Quote
+      </a>
+      <a href="#services" class="btn-secondary">
+        View Services →
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-bar">
+    <div class="container">
+      <div class="hero-bar-inner">
+        <div class="hero-stat">
+          <span class="hero-stat-num">15+</span>
+          <span class="hero-stat-label">Years in the Bay</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">500+</span>
+          <span class="hero-stat-label">Hulls Cleaned</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">24hr</span>
+          <span class="hero-stat-label">Response Time</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">SF Bay</span>
+          <span class="hero-stat-label">Based & Licensed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     SERVICES
+     ============================================ -->
+<section id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="label">What We Do</p>
+      <h2 class="section-title">Underwater Work.<br>Professionally Done.</h2>
+    </div>
+
+    <div class="services-grid reveal">
+
+      <div class="service-card">
+        <p class="service-num">01</p>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <ellipse cx="12" cy="18" rx="10" ry="4"/>
+          <path d="M2 18v-4a10 10 0 0020 0v4"/>
+          <path d="M7 10c0-2.8 2.2-5 5-5s5 2.2 5 5"/>
+        </svg>
+        <p class="service-name">Hull Cleaning</p>
+        <p class="service-desc">Full underwater hull scrubbing. Removes bio-fouling, slime, and growth that slows your boat and wastes fuel.</p>
+      </div>
+
+      <div class="service-card">
+        <p class="service-num">02</p>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M8 12h8M12 8v8"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <p class="service-name">Barnacle Removal</p>
+        <p class="service-desc">Manual and tool-assisted barnacle removal. No shortcuts. We get the hard spots other services skip.</p>
+      </div>
+
+      <div class="service-card">
+        <p class="service-num">03</p>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+        </svg>
+        <p class="service-name">Prop Inspection</p>
+        <p class="service-desc">Full propeller and shaft inspection. We check for damage, entangled line, and wear — and report what we find.</p>
+      </div>
+
+      <div class="service-card">
+        <p class="service-num">04</p>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="11" width="18" height="10" rx="1"/>
+          <path d="M7 11V7a5 5 0 0110 0v4"/>
+          <circle cx="12" cy="16" r="1"/>
+        </svg>
+        <p class="service-name">Zinc Replacement</p>
+        <p class="service-desc">Sacrificial anode inspection and replacement underwater. Protect your drive gear and hull from galvanic corrosion.</p>
+      </div>
+
+      <div class="service-card">
+        <p class="service-num">05</p>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+        </svg>
+        <p class="service-name">Wharf & Commercial Service</p>
+        <p class="service-desc">Ongoing maintenance contracts for commercial fishing operations. Regular dives keep your fleet in the water and earning.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     ABOUT TONY
+     ============================================ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="about-image-placeholder reveal">
+        <div class="about-image-inner">
+          <!-- Atmospheric diver silhouette SVG -->
+          <svg class="diver-silhouette" width="120" height="180" viewBox="0 0 120 180" fill="none">
+            <ellipse cx="60" cy="30" rx="16" ry="18" fill="white"/>
+            <rect x="44" y="46" width="32" height="70" rx="8" fill="white"/>
+            <rect x="28" y="50" width="16" height="48" rx="6" fill="white"/>
+            <rect x="76" y="50" width="16" height="48" rx="6" fill="white"/>
+            <rect x="46" y="112" width="14" height="52" rx="5" fill="white"/>
+            <rect x="60" y="112" width="14" height="52" rx="5" fill="white"/>
+            <!-- Tank -->
+            <rect x="60" y="50" width="10" height="50" rx="4" fill="white" opacity="0.6"/>
+          </svg>
+          <p class="about-image-caption">Tony — SF Bay Commercial Diver</p>
+        </div>
+      </div>
+
+      <div class="about-content reveal">
+        <p class="label">The Operator</p>
+        <h2 class="about-name">Tony.</h2>
+        <div class="about-bio">
+          <p>I've been working the Bay for over fifteen years. Started on fishing boats, moved underwater, and never looked back.</p>
+          <br>
+          <p>Bay Current is just me — <strong>no dispatch, no subcontractors, no surprises.</strong> When you call, I pick up. When I say I'll be there, I'm there.</p>
+          <br>
+          <p>I know these docks, these currents, and the kind of work that actually needs to get done. I'm not here to upsell you. I'm here to get your boat clean and back to work.</p>
+          <br>
+          <p><strong>Fisherman's Wharf is home.</strong> The Bay is the job. This is what I do.</p>
+        </div>
+
+        <div class="about-details">
+          <div class="about-detail">
+            <span class="about-detail-key">Base</span>
+            <span class="about-detail-val">Fisherman's Wharf, SF</span>
+          </div>
+          <div class="about-detail">
+            <span class="about-detail-key">Certified</span>
+            <span class="about-detail-val">Commercial Diver, OSHA</span>
+          </div>
+          <div class="about-detail">
+            <span class="about-detail-key">Experience</span>
+            <span class="about-detail-val">15+ Years in SF Bay</span>
+          </div>
+          <div class="about-detail">
+            <span class="about-detail-key">Coverage</span>
+            <span class="about-detail-val">SF Bay, Marin, Oakland, Alameda</span>
+          </div>
+          <div class="about-detail">
+            <span class="about-detail-key">Specialty</span>
+            <span class="about-detail-val">Commercial Fishing Fleet Support</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     PROCESS
+     ============================================ -->
+<section id="process">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="label" style="color: rgba(242,241,238,0.35);">How It Works</p>
+      <h2 class="process-title">Simple as It Gets.</h2>
+    </div>
+
+    <div class="process-steps">
+
+      <div class="process-step">
+        <div class="step-num-wrap">
+          <div class="step-num">01</div>
+        </div>
+        <h3 class="step-title">Contact</h3>
+        <p class="step-desc">Call, text, or email. Tell me your vessel, location, and what you need. I'll give you a straight answer and a fair price.</p>
+      </div>
+
+      <div class="process-step">
+        <div class="step-num-wrap">
+          <div class="step-num">02</div>
+        </div>
+        <h3 class="step-title">Schedule</h3>
+        <p class="step-desc">We pick a time that works for the tides and your operation. I'll show up when I say I will.</p>
+      </div>
+
+      <div class="process-step">
+        <div class="step-num-wrap">
+          <div class="step-num">03</div>
+        </div>
+        <h3 class="step-title">Dive Service</h3>
+        <p class="step-desc">I go under and do the work. Hull scrubbed, zincs checked, props inspected. Professional gear, professional results.</p>
+      </div>
+
+      <div class="process-step">
+        <div class="step-num-wrap">
+          <div class="step-num">04</div>
+        </div>
+        <h3 class="step-title">Clean Report</h3>
+        <p class="step-desc">You get a quick rundown on what I found and what I did. No upsell. If something needs attention, I'll tell you straight.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     SERVICE AREA
+     ============================================ -->
+<section id="coverage">
+  <div class="container">
+    <div class="coverage-inner">
+      <div class="coverage-text reveal">
+        <p class="label">Service Area</p>
+        <h2 class="coverage-title">San Francisco Bay & Surrounding Docks.</h2>
+        <p class="coverage-desc">
+          Based at Fisherman's Wharf. Serving commercial and private vessels throughout the Bay — from the Ferry Building to Sausalito, Oakland to Alameda.
+        </p>
+        <div class="coverage-tags">
+          <span class="tag">Fisherman's Wharf</span>
+          <span class="tag">Pier 39 Area</span>
+          <span class="tag">Sausalito</span>
+          <span class="tag">Oakland Harbor</span>
+          <span class="tag">Alameda</span>
+          <span class="tag">Richmond Marina</span>
+          <span class="tag">South Beach Harbor</span>
+        </div>
+      </div>
+
+      <div class="coverage-visual reveal">
+        <div class="bay-map">
+          <!-- Simplified SF Bay SVG map -->
+          <svg width="100%" height="100%" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
+            <!-- Bay water -->
+            <rect width="340" height="340" fill="#D4E4ED"/>
+            <!-- Land masses — rough SF Bay shapes -->
+            <!-- San Francisco Peninsula -->
+            <path d="M0 340 L0 80 L40 60 L60 40 L80 20 L100 10 L120 5 L130 20 L140 50 L130 100 L110 150 L90 200 L70 280 L50 340Z" fill="#E8E5DF"/>
+            <!-- Marin County -->
+            <path d="M0 80 L0 0 L80 0 L100 10 L80 20 L60 40 L40 60Z" fill="#E8E5DF"/>
+            <!-- East Bay / Oakland -->
+            <path d="M340 340 L340 0 L260 0 L220 20 L200 60 L210 120 L220 180 L230 240 L250 340Z" fill="#E8E5DF"/>
+            <!-- Marin headlands -->
+            <path d="M50 50 L80 30 L100 10 L90 30 L70 50Z" fill="#DDD8D0"/>
+
+            <!-- Bay label -->
+            <text x="160" y="180" text-anchor="middle" font-family="monospace" font-size="9" fill="#2F6B8A" opacity="0.7" letter-spacing="3">SF BAY</text>
+
+            <!-- Location dots -->
+            <!-- Fisherman's Wharf area -->
+            <circle cx="112" cy="85" r="6" fill="#E8A020"/>
+            <text x="120" y="75" font-family="monospace" font-size="7" fill="#0D1117" letter-spacing="0">FISH. WHARF</text>
+
+            <!-- Oakland -->
+            <circle cx="230" cy="145" r="4" fill="#2F6B8A" opacity="0.7"/>
+            <text x="195" y="142" font-family="monospace" font-size="7" fill="#0D1117">OAKLAND</text>
+
+            <!-- Sausalito -->
+            <circle cx="85" cy="65" r="4" fill="#2F6B8A" opacity="0.7"/>
+            <text x="50" y="60" font-family="monospace" font-size="7" fill="#0D1117">SAUSALITO</text>
+
+            <!-- Alameda -->
+            <circle cx="220" cy="185" r="4" fill="#2F6B8A" opacity="0.7"/>
+            <text x="183" y="182" font-family="monospace" font-size="7" fill="#0D1117">ALAMEDA</text>
+
+            <!-- Golden Gate Bridge -->
+            <line x1="70" y1="55" x2="50" y2="55" stroke="#B85C38" stroke-width="2" stroke-dasharray="3,2"/>
+            <text x="20" y="50" font-family="monospace" font-size="6" fill="#B85C38">GG BRIDGE</text>
+
+            <!-- Bay Bridge -->
+            <line x1="145" y1="115" x2="215" y2="135" stroke="#8A9099" stroke-width="1.5" stroke-dasharray="3,2"/>
+
+            <!-- Scale bar -->
+            <line x1="20" y1="320" x2="70" y2="320" stroke="#8A9099" stroke-width="1"/>
+            <line x1="20" y1="316" x2="20" y2="324" stroke="#8A9099" stroke-width="1"/>
+            <line x1="70" y1="316" x2="70" y2="324" stroke="#8A9099" stroke-width="1"/>
+            <text x="30" y="315" font-family="monospace" font-size="6" fill="#8A9099">~5mi</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     CONTACT
+     ============================================ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+
+      <div class="reveal">
+        <p class="label" style="color: rgba(242,241,238,0.3);">Get in Touch</p>
+        <h2 class="contact-headline">Ready<br>When<br>You Are.</h2>
+        <p class="contact-note">
+          Best way to reach me is by phone or text. I'm usually on the water early, so a morning call gets a same-day response.
+        </p>
+
+        <div class="contact-response" style="margin-top: 32px;">
+          <div class="response-dot"></div>
+          <p class="response-text">
+            Typical response time: same day. For urgent commercial fleet needs, call direct — I pick up.
+          </p>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="contact-methods">
+
+          <a href="tel:+12095526958" class="contact-method">
+            <svg class="contact-method-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+            <div class="contact-method-content">
+              <span class="contact-method-label">Call</span>
+              <span class="contact-method-value">(209) 552-6958</span>
+            </div>
+          </a>
+
+          <a href="sms:+12095526958" class="contact-method">
+            <svg class="contact-method-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+            </svg>
+            <div class="contact-method-content">
+              <span class="contact-method-label">Text / SMS</span>
+              <span class="contact-method-value">(209) 552-6958</span>
+            </div>
+          </a>
+
+          <a href="mailto:Rocketnovember1975@gmail.com" class="contact-method">
+            <svg class="contact-method-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <div class="contact-method-content">
+              <span class="contact-method-label">Email</span>
+              <span class="contact-method-value">Rocketnovember1975@gmail.com</span>
+            </div>
+          </a>
+
+          <div class="contact-method" style="cursor: default;">
+            <svg class="contact-method-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <div class="contact-method-content">
+              <span class="contact-method-label">Location</span>
+              <span class="contact-method-value">Fisherman's Wharf, San Francisco, CA</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="#hero" class="logo footer-logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M4 20 Q16 28 28 20" stroke="rgba(242,241,238,0.5)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <line x1="2" y1="20" x2="30" y2="20" stroke="#2F6B8A" stroke-width="1.5"/>
+            <line x1="16" y1="6" x2="16" y2="20" stroke="rgba(242,241,238,0.5)" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="16" cy="6" r="2" fill="#E8A020"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-primary">Bay Current</span>
+          <span class="logo-secondary">Diving · SF Bay</span>
+        </div>
+      </a>
+
+      <p class="footer-copy">© 2025 Bay Current Diving · Fisherman's Wharf, San Francisco, CA · Licensed Commercial Diver</p>
+      <a href="bay-current-brand.html" style="font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(242,241,238,0.15); text-decoration: none;">Brand Guide →</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      // Small stagger for sibling elements
+      const delay = Array.from(entry.target.parentElement?.children || []).indexOf(entry.target) * 80;
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, Math.min(delay, 200));
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+reveals.forEach(el => observer.observe(el));
+
+// Nav scroll state
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 20) {
+    nav.style.boxShadow = '0 1px 24px rgba(13,17,23,0.08)';
+  } else {
+    nav.style.boxShadow = 'none';
+  }
+}, { passive: true });
+
+// Process steps — re-trigger animation when in view
+const steps = document.querySelectorAll('.process-step');
+const stepObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animationPlayState = 'running';
+    }
+  });
+}, { threshold: 0.2 });
+
+steps.forEach(step => {
+  step.style.animationPlayState = 'paused';
+  stepObserver.observe(step);
+});
+</script>
+
+</body>
+</html>
