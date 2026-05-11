@@ -218,25 +218,65 @@
         </div>
       </div>
       <div class="coverage-visual reveal">
-        <div class="bay-map">
-          <svg width="100%" height="100%" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map of San Francisco Bay service area">
-            <rect width="340" height="340" fill="#D4E4ED"/>
-            <path d="M0 340 L0 80 L40 60 L60 40 L80 20 L100 10 L120 5 L130 20 L140 50 L130 100 L110 150 L90 200 L70 280 L50 340Z" fill="#E8E5DF"/>
-            <path d="M0 80 L0 0 L80 0 L100 10 L80 20 L60 40 L40 60Z" fill="#E8E5DF"/>
-            <path d="M340 340 L340 0 L260 0 L220 20 L200 60 L210 120 L220 180 L230 240 L250 340Z" fill="#E8E5DF"/>
-            <text x="160" y="180" text-anchor="middle" font-family="monospace" font-size="9" fill="#2F6B8A" opacity="0.7" letter-spacing="3">SF BAY</text>
-            <circle cx="112" cy="85" r="6" fill="#E8A020"/>
-            <text x="120" y="75" font-family="monospace" font-size="7" fill="#0D1117">FISH. WHARF</text>
-            <circle cx="230" cy="145" r="4" fill="#2F6B8A" opacity="0.7"/>
-            <text x="195" y="142" font-family="monospace" font-size="7" fill="#0D1117">OAKLAND</text>
-            <circle cx="85" cy="65" r="4" fill="#2F6B8A" opacity="0.7"/>
-            <text x="50" y="60" font-family="monospace" font-size="7" fill="#0D1117">SAUSALITO</text>
-            <circle cx="220" cy="185" r="4" fill="#2F6B8A" opacity="0.7"/>
-            <text x="183" y="182" font-family="monospace" font-size="7" fill="#0D1117">ALAMEDA</text>
-            <line x1="70" y1="55" x2="50" y2="55" stroke="#B85C38" stroke-width="2" stroke-dasharray="3,2"/>
-            <text x="20" y="50" font-family="monospace" font-size="6" fill="#B85C38">GG BRIDGE</text>
-          </svg>
-        </div>
+       <div class="bay-map">
+<svg width="100%" height="100%" viewBox="0 0 340 340"
+     xmlns="http://www.w3.org/2000/svg"
+     role="img" aria-label="Map of San Francisco Bay service area">
+
+  <!-- Water background — entire canvas -->
+  <rect width="340" height="340" fill="#C8DCE8"/>
+
+  <!-- MARIN COUNTY — top-left -->
+  <path d="M 0 0 L 155 0 L 152 12 L 140 22 L 125 30 L 108 38 L 92 48 L 78 60 L 68 75 L 62 88 L 58 100 L 55 115 L 58 128 L 62 138 L 55 145 L 42 148 L 28 144 L 18 138 L 10 128 L 4 112 L 0 95 Z" fill="#D8D3CB"/>
+  <path d="M 58 100 L 68 88 L 78 85 L 82 92 L 76 102 L 68 110 L 60 112 L 55 107 Z" fill="#CCC7BF"/>
+
+  <!-- SF PENINSULA — bottom-left -->
+  <path d="M 0 155 L 0 340 L 108 340 L 110 318 L 112 295 L 114 268 L 116 242 L 118 218 L 118 198 L 116 178 L 112 162 L 106 152 L 98 147 L 88 145 L 75 148 L 62 152 L 48 155 L 30 156 L 12 156 Z" fill="#D8D3CB"/>
+
+  <!-- EAST BAY — full right side -->
+  <path d="M 340 0 L 340 340 L 200 340 L 196 310 L 194 285 L 196 265 L 200 248 L 204 232 L 206 218 L 208 200 L 210 182 L 212 165 L 214 148 L 218 130 L 222 112 L 228 95 L 235 78 L 244 60 L 255 42 L 268 25 L 285 12 L 305 4 L 340 0 Z" fill="#D8D3CB"/>
+
+  <!-- Alameda island water notch -->
+  <path d="M 200 248 L 204 242 L 210 238 L 216 240 L 220 248 L 216 255 L 208 258 L 202 254 Z" fill="#C8DCE8"/>
+
+  <!-- GOLDEN GATE BRIDGE -->
+  <line x1="66" y1="112" x2="84" y2="143" stroke="#B85C38" stroke-width="3" stroke-linecap="round"/>
+  <line x1="70" y1="106" x2="70" y2="126" stroke="#B85C38" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="65" y1="112" x2="75" y2="112" stroke="#B85C38" stroke-width="1.5"/>
+  <line x1="80" y1="134" x2="80" y2="152" stroke="#B85C38" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="75" y1="143" x2="86" y2="143" stroke="#B85C38" stroke-width="1.5"/>
+  <text x="26" y="105" font-family="monospace" font-size="7" fill="#B85C38" font-weight="600" letter-spacing="0.5">GG BRIDGE</text>
+
+  <!-- BAY BRIDGE dashed -->
+  <line x1="112" y1="168" x2="210" y2="192" stroke="#8A9099" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.6"/>
+
+  <!-- SF BAY label -->
+  <text x="165" y="260" text-anchor="middle" font-family="monospace" font-size="10" fill="#2F6B8A" opacity="0.5" letter-spacing="5">SF BAY</text>
+
+  <!-- Sausalito — Marin land, north of bridge -->
+  <circle cx="69" cy="73" r="4" fill="#2F6B8A" opacity="0.9"/>
+  <text x="80" y="77" font-family="monospace" font-size="7" fill="#1C2127">SAUSALITO</text>
+
+  <!-- Fisherman's Wharf — SF shore -->
+  <circle cx="106" cy="163" r="6" fill="#E8A020"/>
+  <text x="115" y="159" font-family="monospace" font-size="7" fill="#1C2127" font-weight="600">FISH. WHARF</text>
+
+  <!-- Oakland — East Bay waterfront -->
+  <circle cx="212" cy="205" r="4" fill="#2F6B8A" opacity="0.9"/>
+  <text x="178" y="202" font-family="monospace" font-size="7" fill="#1C2127">OAKLAND</text>
+
+  <!-- Alameda — south of Oakland -->
+  <circle cx="206" cy="232" r="4" fill="#2F6B8A" opacity="0.9"/>
+  <text x="172" y="235" font-family="monospace" font-size="7" fill="#1C2127">ALAMEDA</text>
+
+  <!-- Scale bar -->
+  <line x1="16" y1="322" x2="66" y2="322" stroke="#8A9099" stroke-width="1"/>
+  <line x1="16" y1="318" x2="16" y2="326" stroke="#8A9099" stroke-width="1"/>
+  <line x1="66" y1="318" x2="66" y2="326" stroke="#8A9099" stroke-width="1"/>
+  <text x="26" y="317" font-family="monospace" font-size="6" fill="#8A9099">~5 mi</text>
+
+</svg>
+</div>
       </div>
     </div>
   </div>
